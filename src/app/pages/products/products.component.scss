@@ -1,0 +1,75 @@
+@use '@angular/material' as mat;
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.products-page {
+    margin: 3rem;
+    
+}
+
+.filter-ctn {
+    margin-bottom: 2rem;
+    padding: 1rem;
+}
+
+::ng-deep .filters {
+    @include mat.button-toggle-overrides((
+        selected-state-background-color: #d9ff96,
+    ));
+}
+
+img {
+    width: 15rem;
+    height: 15rem;
+    padding: 1rem;
+    border-radius: 2rem;
+}
+
+::ng-deep .product-card {
+    display: flex;
+    height: 30rem;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;    
+    text-align: center;
+    width: 90%;
+    @include mat.card-overrides((
+        elevated-container-color: #fafaa1,
+    ));
+}
+
+::ng-deep .product-card :hover {
+    @include mat.card-overrides((
+        elevated-container-color: rgba(229, 255, 79, 0.1),
+    ));
+}
+
+::ng-deep mat-card-actions {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 3rem;
+}
+
+.cart-btn {
+    @include mat.button-overrides((
+        filled-label-text-color: white,
+        filled-container-color: #43ab5d,
+        filled-state-layer-color: #ffffff,
+        filled-hover-state-layer-opacity: 0.04,
+    ));
+}
+
+.fav-icon {
+    color: red;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

@@ -1,0 +1,41 @@
+<head>
+    <link rel="stylesheet" href="header.component.scss" />
+</head>
+<div id="header">
+    <div class="nav">
+        <a routerLink="/"><img src="./assets/images/logo.png" alt="logo" /></a>
+        <ul>
+            <li><a routerLink="/home">Főoldal</a></li>
+            <li><a routerLink="/about">Rólunk</a></li>
+            <li><a routerLink="/products">Termékeink</a></li>
+        </ul>
+        <div>
+            <button mat-icon-button [matMenuTriggerFor]="profileMenu">
+                <mat-icon class="icon">account_circle</mat-icon>
+            </button>
+            <button mat-icon-button routerLink="/cart" class="cart-button">
+                <mat-icon class="icon">shopping_cart</mat-icon>
+            </button>
+        </div>
+        <mat-menu #profileMenu="matMenu" xPosition="before" class="profile-menu">
+            <!-- NINCS BEJELENTKEZVE-->
+            <button mat-menu-item *ngIf="!isLoggedIn()" routerLink="/login">
+                Bejelentkezés
+            </button>
+            <button mat-menu-item *ngIf="!isLoggedIn()" routerLink="/register">
+                Regisztráció
+            </button>
+
+            <!--BEJELENTKEZVE-->
+            <button mat-menu-item *ngIf="isLoggedIn()" routerLink="/profile">
+                Profil
+            </button>
+            <button mat-menu-item *ngIf="isLoggedIn()" routerLink="/recent-orders">
+                Rendelések
+            </button>
+            <button mat-menu-item *ngIf="isLoggedIn()" (click)="logout()" routerLink="/">
+                Kijelentkezés
+            </button>
+        </mat-menu>
+    </div>
+</div>

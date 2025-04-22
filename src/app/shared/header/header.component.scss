@@ -1,0 +1,77 @@
+@use '@angular/material' as mat;
+
+$header-color: #ffffda;
+$header-color-hover: #fbfbcf;
+$header-size: 4rem;
+$text-color: #92C730;
+$li-width: 6rem;
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    background-color: $header-color;
+    height: $header-size;
+}
+
+.nav a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: $header-size;
+    
+}
+
+.nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+
+}
+
+.nav ul li {
+    width: $li-width;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $header-size;
+    
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color: $text-color;
+    width: $li-width;
+    height: $header-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav ul li a:hover {
+    background-color: $header-color-hover;
+    height: $header-size;
+    text-align: center;
+}
+
+::ng-deep .profile-menu {
+    @include mat.menu-overrides((
+      item-label-text-color: $text-color,
+      container-color: $header-color,
+      item-hover-state-layer-color: $header-color-hover,
+    ));
+}
+
+::ng-deep .icon {
+    color: #78A831;
+}

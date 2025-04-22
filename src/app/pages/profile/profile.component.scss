@@ -1,0 +1,32 @@
+
+@use '@angular/material' as mat;
+
+::ng-deep :root {
+  @include mat.dialog-overrides((
+    container-color: #f4f4a2,
+    subhead-color: #dede95,
+  ));
+}
+
+.profile-container {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about {
+  display: flex;
+}
+
+.about-card {
+  @include mat.card-overrides((
+    outlined-container-color: #f4f4a2,
+    outlined-outline-color: #dede95
+  ));
+}
+
+.about-card mat-card-content {
+  margin: 0.5rem;
+}
+

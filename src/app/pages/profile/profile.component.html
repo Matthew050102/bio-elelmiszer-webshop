@@ -1,0 +1,18 @@
+<div class="profile-container">
+    <div class="profile-info">
+        <div class="about">
+            <mat-card appearance="outlined" class="about-card">
+                <mat-card-content>Teljes Név: {{currentUser?.surname}} {{currentUser?.firstname}}</mat-card-content>
+                <mat-card-content>Email: {{currentUser?.email}}</mat-card-content>
+                <mat-card-content>Telefonszám: {{currentUser?.phone}}</mat-card-content>
+            </mat-card>
+        </div>
+        <button mat-raised-button color="primary" (click)="openDialog()">Profil szerkesztése</button>
+        <!-- TODO: További lehetőségek megvalósítása
+
+        <button mat-raised-button color="warn" (click)="deleteProfile()">Profil törlése</button>
+        <button mat-raised-button color="accent" (click)="logout()">Kijelentkezés</button> 
+        -->
+
+    </div>
+</div>

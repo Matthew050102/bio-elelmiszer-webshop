@@ -1,0 +1,42 @@
+@use '@angular/material' as mat;
+
+$bg-color: #f9e2be;
+$text-color: #b6c325;
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    background-color: $bg-color;
+}
+
+.error-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.error-msg {
+    text-align: center;
+    color: #9F5843;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding-top: 1rem;
+    height: 8rem;
+}
+
+.return-btn {
+    @include mat.button-overrides((
+        filled-label-text-color: white,
+        filled-container-color: #8f5c4d,
+        filled-state-layer-color: #000000,
+        filled-hover-state-layer-opacity: 0.04,
+    ));
+}

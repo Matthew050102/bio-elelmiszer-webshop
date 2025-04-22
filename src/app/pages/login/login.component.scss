@@ -1,0 +1,99 @@
+@use '@angular/material' as mat;
+$fill-color-primary: #defdbd;
+$fill-color-secondary: #91c45a;
+$btn-width: 30rem;
+$ctn-width: 40rem;
+
+::ng-deep :root {
+    @include mat.snack-bar-overrides((
+        container-color: rgb(221, 38, 38),
+        supporting-text-color: rgb(255, 255, 255),
+    ));
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-ctn {    
+    background-color: #fafaa1;
+    border-radius: 1.5rem;
+    box-shadow: 0.5rem 0.5rem 1rem rgba(141, 141, 141, 0.15);
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: $ctn-width;
+    
+}
+
+.login-text p {
+    color: #000000;
+    text-align: center;
+    padding-top: 2rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+
+    @include mat.form-field-overrides((
+        filled-container-color: $fill-color-primary,
+        filled-focus-label-text-color: $fill-color-secondary,
+        filled-focus-active-indicator-color: $fill-color-secondary,
+        filled-caret-color: $fill-color-secondary,
+    ));
+}
+
+.login-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-form mat-form-field {
+    width: 30rem;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: $ctn-width;
+}
+
+.login-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4rem;
+    margin-bottom: 1rem;
+}
+
+.login-btn {
+    width: $btn-width;
+    @include mat.button-overrides((
+        filled-label-text-color: white,
+        filled-container-color: #43ab5d,
+        filled-state-layer-color: #ffffff,
+        filled-hover-state-layer-opacity: 0.04,
+    ));
+}
+
+.register-container {
+    margin-bottom: 2rem;
+}

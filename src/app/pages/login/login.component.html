@@ -1,0 +1,30 @@
+<div class="login-page">
+  <div class="login-ctn">
+    <div class="login-text">
+      <p>Bejelentkezés</p>
+    </div>
+    <div class="login-form">
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <mat-form-field>
+          <mat-label>E-mail cím</mat-label>
+          <input matInput type="email" formControlName="email">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Jelszó</mat-label>
+          <input matInput type="password" formControlName="password" minlength="6">
+          <mat-hint>Legalább 6 karakter</mat-hint>
+        </mat-form-field>
+
+        <div class="btn-container">
+          <div class="login-btn-container">
+            <button mat-flat-button class="login-btn" type="submit"
+              [disabled]="loginForm.invalid">Bejelentkezés</button>
+          </div>
+        </div>
+      </form>
+      <div class="register-container">
+        <p>Még nem regisztráltál? <a routerLink="/register">Regisztrálj itt!</a></p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+@use '@angular/material' as mat;
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.home-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.home-banner {
+    margin-top: 2rem;
+}
+
+.btn-ctn {
+    margin: 1rem 0;
+    text-align: center;
+}
+
+
+
+.explore-btn {
+    width: 50rem;
+    @include mat.button-overrides((
+        filled-label-text-color: white,
+        filled-container-color: #43ab5d,
+        filled-state-layer-color: #ffffff,
+        filled-hover-state-layer-opacity: 0.04,
+    ));
+}

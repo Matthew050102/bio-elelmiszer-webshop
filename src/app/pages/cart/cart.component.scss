@@ -1,0 +1,43 @@
+@use '@angular/material' as mat;
+
+.cart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-item-container {
+    max-width: 40rem;
+    width: 100%;
+}
+
+.cart-item {
+    margin-bottom: 1rem;
+    background-color: #f3f3f3;
+    padding: 1rem;
+}
+
+.cart-summary {
+    padding: 1rem;
+    width: 100%;
+    max-width: 40rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon {
+    color: red;
+}
+
+.buy-btn {
+    @include mat.button-overrides((
+        filled-label-text-color: white,
+        filled-container-color: #43ab5d,
+        filled-state-layer-color: #ffffff,
+        filled-hover-state-layer-opacity: 0.04,
+    ));
+}
+
