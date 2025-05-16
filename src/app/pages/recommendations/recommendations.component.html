@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="recommendations">
+    <h2 class="section-title">Újdonsült Ajánlatok</h2>
+    
+    <div class="query-select">
+      <label for="query-selector">Válassz egy ajánlati kategóriát:</label>
+      <select #querySelect id="query-selector" (change)="changeQuery(querySelect.value)" class="form-control">
+        <option value="">-- Válassz egy kategóriát --</option>
+        <option value="oatUnder500">500 Ft alatti gabonafélék</option>
+        <option value="expensiveWithDesc">Prémium termékek részletes leírással</option>
+        <option value="glutenFree">Gluténmentes bio termékek</option>
+        <option value="budgetVeggies">Kedvező árú bio zöldségek</option>
+      </select>
+    </div>
+    
+    <div *ngIf="selectedQuery" class="query-info">
+      <p class="query-description">{{ queryDescriptions[selectedQuery] }}</p>
+    </div>
+    
+    <div *ngIf="loading" class="loading">
+      <p>Ajánlott termékek betöltése...</p>
+      <div class="spinner-border text-success" role="status">
+        <span class="visually-hidden">Betöltés...</span>
+      </div>
+    </div>
+    
+    <div *ngIf="!selectedQuery" class="empty-state">
+      <p>Válassz egy kategóriát az ajánlott termékek megjelenítéséhez</p>
+    </div>
+    
+    <div *ngIf="selectedQuery && !loading" class="product-grid">
+      <ng-container *ngIf="activeProducts$ && activeProducts$.length > 0; else noProducts">
+        <div *ngFor="let product of activeProducts$" class="product-card">
+          <img [src]="product.imageUrl" [alt]="product.name" class="product-image">
+          <div class="product-info">
+            <h3 class="product-name">{{ product.name }}</h3>
+            <span class="product-category">{{ product.category }}</span>
+            <p class="product-price">{{ product.price | formatPrice }}</p>
+            <p class="product-description" [title]="product.description">{{ product.description | shorterText}}</p>
+          </div>
+        </div>
+      </ng-container>
+      
+      <ng-template #noProducts>
+        <div class="no-results">
+          <p>Nincs találat az adott kategóriára.</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

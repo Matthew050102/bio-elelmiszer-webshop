@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -7,7 +7,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthService } from '../../services/AuthGuard/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -16,19 +17,16 @@ import { AuthService } from '../../services/AuthGuard/auth.service';
   styleUrl: './login.component.scss'
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
   loginForm: FormGroup;
-  authService: AuthService;
-  router: Router;
   snackBar: MatSnackBar = inject(MatSnackBar);
+  authSubscription?: Subscription;
 
-  constructor(fb: FormBuilder, authService: AuthService, router: Router) {
+  constructor(fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
-    this.authService = authService;
-    this.router = router;
   }
 
   openSnackBar(message: string): void {
@@ -42,14 +40,19 @@ export class LoginComponent {
   onLogin() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      if (this.authService.login(email, password)) {
-        if (this.snackBar) {
-          this.closeSnackBar();
-        }
-        this.router.navigateByUrl("/");
-      } else {
-        this.openSnackBar("Hibás adatok!");
-      }
+
+      this.authService.login(email, password)
+      .then(() => {
+        this.router.navigateByUrl('/');
+      })
+      .catch((error) => {
+        this.openSnackBar('Hibás bejelentkezési adatok!');
+      });
+
     }
+  }
+
+  ngOnDestroy() {
+    this.authSubscription?.unsubscribe();
   }
 }

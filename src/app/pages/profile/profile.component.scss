@@ -1,11 +1,50 @@
-
 @use '@angular/material' as mat;
 
 ::ng-deep :root {
-  @include mat.dialog-overrides((
-    container-color: #f4f4a2,
-    subhead-color: #dede95,
-  ));
+  @include mat.dialog-overrides((container-color: #f4f4a2,
+      subhead-color: #dede95,
+    ));
+}
+
+.left-btn {
+  background-color: white;
+  color: #000;
+  border: none;
+  padding: 1rem;
+  border-radius: 0.5rem 0 0 0.5rem;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #EEE;
+    box-shadow: -1px 0 5px #bdbcbc;
+  }
+}
+
+
+
+.right-btn {
+  background-color: white;
+  color: #000;
+  border-left: 1px solid rgb(216, 216, 216);
+  border-right: none;
+  border-bottom: none;
+  border-top: none;
+  padding: 1rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #5caa5a;
+    box-shadow: 2px 0 5px #335f32;
+  }
+}
+
+svg.empty path {
+  fill: none;
+}
+
+svg.green path {
+  fill: green;
 }
 
 .profile-container {
@@ -20,13 +59,10 @@
 }
 
 .about-card {
-  @include mat.card-overrides((
-    outlined-container-color: #f4f4a2,
-    outlined-outline-color: #dede95
-  ));
+  @include mat.card-overrides((outlined-container-color: #f4f4a2,
+      outlined-outline-color: #dede95));
 }
 
 .about-card mat-card-content {
   margin: 0.5rem;
 }
-

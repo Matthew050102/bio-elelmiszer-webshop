@@ -1,0 +1,10 @@
+<mat-card class="cart-item">
+    <mat-card-content>
+      <h3>{{ product?.name }}</h3>
+      <p>Ár: {{ product?.price*item.quantity | formatPrice }}</p>
+      <p>Mennyiség: <input type="number" value="{{ item.quantity }}" (change)="onChangeQuantity($event)"></p>
+      <button mat-icon-button (click)="onDeleteProductFromCart()">
+        <mat-icon class="icon">delete</mat-icon>
+      </button>
+    </mat-card-content>
+  </mat-card>

@@ -1,0 +1,24 @@
+<mat-card class="product-card" appearance="raised">
+  <mat-card-header>
+    <div>
+      <mat-card-title [ngStyle]="{'font-size.px':23}">{{ product.name }}</mat-card-title>
+      <mat-card-subtitle>{{ product.category }}</mat-card-subtitle>
+    </div>
+
+  </mat-card-header>
+  <div>
+    <button mat-icon-button *ngIf="isAdminUser"><mat-icon class="product-icon" (click)="onUpdateProduct()">edit</mat-icon></button>
+  </div>
+  <img mat-card-image [src]="product.imageUrl" />
+  <mat-card-content>
+    <p [title]="product.description" [ngStyle]="{'font-size.px':16}">{{ product.description | shorterText }}</p>
+    <p><strong>{{ product.price | formatPrice }}</strong></p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-flat-button class="cart-btn" (click)="onAddToCart()">Kosárba</button>
+    <div class="icon-btns" *ngIf="isAdminUser">
+      <button mat-icon-button *ngIf="isAdminUser"><mat-icon class="fav-icon" 
+          (click)="onDeleteProduct()">delete</mat-icon></button>
+    </div>
+  </mat-card-actions>
+</mat-card>

@@ -28,10 +28,6 @@
     justify-content: center;
 }
 
-.icon {
-    color: red;
-}
-
 .buy-btn {
     @include mat.button-overrides((
         filled-label-text-color: white,

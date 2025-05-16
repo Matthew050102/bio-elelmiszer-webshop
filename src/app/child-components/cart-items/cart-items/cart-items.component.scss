@@ -1,0 +1,21 @@
+.cart-item {
+    margin-bottom: 1rem;
+    background-color: #f3f3f3;
+    padding: 1rem;
+}
+
+.icon {
+    color: red;
+}
+
+input {
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-left: 0.5rem;
+}
+
+input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }

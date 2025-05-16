@@ -12,7 +12,9 @@ export const routes: Routes = [
     {path: 'cart', loadComponent: () => import('./pages/cart/cart.component').then(m => m.CartComponent), canActivate: [authGuard]},
     {path: 'profile', loadComponent: () => import('./pages/profile/profile.component').then(m => m.ProfileComponent), canActivate: [authGuard]},
     {path: 'recent-orders', loadComponent: () => import('./pages/recent-orders/recent-orders.component').then(m => m.RecentOrdersComponent), canActivate: [authGuard]},
-    
+    {path: 'recommendations', loadComponent: () => import('./pages/recommendations/recommendations.component').then(m => m.RecommendationsComponent), canActivate: [authGuard]},
+
+
     {path: '', redirectTo: 'home',  pathMatch: 'full'},
     {path: '**', component: PageNotFoundComponent}
 ];

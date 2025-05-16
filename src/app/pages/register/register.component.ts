@@ -7,45 +7,34 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthService } from '../../services/AuthGuard/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-register',
-  imports: [RouterLink, ReactiveFormsModule, MatProgressSpinnerModule, MatFormFieldModule, MatIconModule, MatSelectModule, MatInputModule, MatButtonModule],
+  imports: [RouterLink, ReactiveFormsModule, MatProgressSpinnerModule, MatFormFieldModule, MatIconModule, MatSelectModule, MatInputModule, MatButtonModule, MatCheckboxModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
 
 export class RegisterComponent {
-  /*
-  registerForm = new FormGroup({
-    username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
-    confirmPassword: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email])
-  });
-  */
-
   registerForm: FormGroup;
-  authService: AuthService;
-  router: Router;
   snackBar: MatSnackBar = inject(MatSnackBar);
 
   isLoading = false;
   showForm = true;
 
-  constructor(fb: FormBuilder, authService: AuthService, router: Router) {
+  constructor(fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.registerForm = fb.group({
       surname: ['', [Validators.required]],
       firstname: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required]]
+      phone: ['', [Validators.required]],
+      isAdmin: [false]
     });
-    this.authService = authService;
-    this.router = router;
   }
 
   openSnackBar(message: string): void {
@@ -61,27 +50,25 @@ export class RegisterComponent {
       return;
     }
 
-    /*
-    const password = this.registerForm.get('password')?.value;
-    const confirmPassword = this.registerForm.get('confirmPassword')?.value;
-    */
-    const { surname, firstname, password, confirmPassword, email, phone } = this.registerForm.value;
+    const { surname, firstname, password, confirmPassword, email, phone, isAdmin } = this.registerForm.value;
 
     if (password !== confirmPassword) {
       this.openSnackBar('A két jelszó nem egyezik meg!');
       return;
     }
+    this.authService.register(surname, firstname, password, email, phone, isAdmin)
+      .then(() => {
+        this.isLoading = true;
+        this.showForm = false;
 
-    this.isLoading = true;
-    this.showForm = false;
+        if (this.snackBar) {
+          this.closeSnackBar();
+        }
 
-    this.authService.register(surname, firstname, password, email, phone);
-    if (this.snackBar) {
-      this.closeSnackBar();
-    }
-
-    setTimeout(() => {
-      this.router.navigateByUrl('/login');
-    }, 2000);
+      })
+      .catch((error) => {
+        this.openSnackBar('Hiba történt a regisztráció során!');
+        return;
+      });
   }
 }

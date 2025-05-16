@@ -1,0 +1,23 @@
+@use '@angular/material' as mat;
+
+.dialog {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 1rem;
+
+    .dialog-btn {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        width: 100%;
+
+        @include mat.button-overrides((
+            filled-container-color: rgb(0, 150, 8),
+        ));
+    }
+
+}

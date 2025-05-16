@@ -2,33 +2,21 @@
     <div class="products-ctn">
         <div class="filter-ctn">
             <mat-button-toggle-group multiple class="filters" (change)="filterProducts($event)">
-                @for (category of categories; track $index) {
-                    <mat-button-toggle value={{category}}>{{category}}</mat-button-toggle>
-                }
+                <mat-button-toggle *ngFor="let category of categories" [value]="category">{{
+                    category}}</mat-button-toggle>
             </mat-button-toggle-group>
+            
+            <button mat-fab extended color="primary" class="add-product-btn" *ngIf="isAdminUser"
+                (click)="openAddProductDialog()">
+                <mat-icon>add</mat-icon>
+                Termék hozzáadása
+            </button>
         </div>
-        <mat-grid-list cols="4" rowHeight="35rem">
-            @for (product of selectedProducts; track product.id) {
-            <mat-grid-tile>
-                <mat-card class="product-card" appearance="raised">
-                    <mat-card-header>
-                        <mat-card-title>{{product.name}}</mat-card-title>
-                        <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
-                    </mat-card-header>
-                    <img mat-card-image
-                        src={{product.imageUrl}} />
-                    <mat-card-content>
-                        <p>{{product.description}}</p>
-                        <p><strong>{{product.price | formatPrice}}</strong></p>
-                    </mat-card-content>
-                    <mat-card-actions>
-                        <button mat-flat-button class="cart-btn">Kosárba</button>
-                        <button mat-icon-button><mat-icon class="fav-icon">favorite</mat-icon></button>
-                    </mat-card-actions>
-                </mat-card>
-            </mat-grid-tile>
-            }
-        </mat-grid-list>
-
+        <div class="product-grid">
+            <app-product-card *ngFor="let product of selectedProducts" [product]="product"
+                (addedToCart)="onAddItemToCart($event)" (deleteProduct)="openDeleteProductDialog($event)"
+                (updateProduct)="openUpdateProductDialog($event)">
+            </app-product-card>
+        </div>
     </div>
 </div>

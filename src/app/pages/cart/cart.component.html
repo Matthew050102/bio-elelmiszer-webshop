@@ -1,21 +1,12 @@
 <div class="cart-container">
   <h2>Kosár</h2>
-
-  <div *ngFor="let item of cartItems; let i = index" class="cart-item-container">
-    <mat-card class="cart-item">
-      <mat-card-content>
-        <h3>{{ item.name }}</h3>
-        <p>Ár: {{ item.price }} Ft</p>
-        <p>Mennyiség: {{ item.quantity }}</p>
-        <button mat-icon-button (click)="removeItem(i)">
-          <mat-icon class="icon">delete</mat-icon>
-        </button>
-      </mat-card-content>
-    </mat-card>
+  <p *ngIf="!this.hasCart">Nincs a kosárban semmilyen termék.</p>
+  <div class="cart-item-container" *ngIf="this.hasCart">
+    <app-cart-items *ngFor="let item of cart" [item]="item" (totalPrice)="getTotalPrice()" (deleteProduct)="loadData()"></app-cart-items>
   </div>
 
-  <div class="cart-summary">
-    <h3>Összesen: {{ getTotalPrice() }} Ft</h3>
-    <button mat-flat-button class="buy-btn">Fizetés</button>
+  <div class="cart-summary" *ngIf="this.hasCart">
+    <h3>Összesen: {{ this.totalPrice | formatPrice }}</h3>
+    <button mat-flat-button class="buy-btn" (click)="onSubmit()">Fizetés</button>
   </div>
 </div>

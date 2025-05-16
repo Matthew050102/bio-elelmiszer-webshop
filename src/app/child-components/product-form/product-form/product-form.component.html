@@ -1,0 +1,23 @@
+
+<h1>Termék létrehozása</h1>
+<form [formGroup]="productForm" class="dialog" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+        <mat-label>Termék Neve</mat-label>
+        <input matInput formControlName="name">
+    </mat-form-field>
+    
+    <mat-form-field>
+        <mat-label>Termék Kategóriája</mat-label>
+        <input matInput formControlName="category">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Termék Ára</mat-label>
+        <input matInput formControlName="price" type="number">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Termék Leírása</mat-label>
+        <input matInput formControlName="description">
+    </mat-form-field>
+    
+    <button mat-flat-button color="primary" class="btn-submit">Mentés</button>
+</form>

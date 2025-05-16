@@ -1,13 +1,16 @@
-import { Component, inject, model, signal } from '@angular/core';
-import { AuthService } from '../../services/AuthGuard/auth.service';
-import { User } from '../../models/user';
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth/auth.service';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
-import { ProfileFormComponent } from '../../forms/profile-form/profile-form.component';
+import { MatButtonModule } from '@angular/material/button';
+import { ProfileService } from '../../services/profile/profile.service';
+import { UserModel } from '../../models/user-model';
 
 @Component({
   selector: 'app-profile',
-  imports: [MatCard, MatCardContent],
+  imports: [MatCard, MatCardContent, MatButtonModule, FormsModule, CommonModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 
@@ -15,33 +18,19 @@ import { ProfileFormComponent } from '../../forms/profile-form/profile-form.comp
 
 export class ProfileComponent {
   dialog = inject(MatDialog);
-  authService: AuthService;
-  currentUser: User | null = null;
+  currentUserData: UserModel | null = null;
 
-  constructor(auth: AuthService) {
-    this.authService = auth;
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser')!);
+  selectedColor: 'empty' | 'green' = 'empty';
+
+  constructor(private auth: AuthService, private profileService: ProfileService) {
+    this.getProfileData();
   }
 
-  ngOnInit() {
-    
-  }
-
-  onProfileUpdate(updatedData: any): void {
-    this.currentUser = { ...this.currentUser, ...updatedData };
-    localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-    this.authService.refresh();
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(ProfileFormComponent, {
-      data: { surname: this.currentUser?.surname, firstname: this.currentUser?.firstname },
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.onProfileUpdate(result);
+  getProfileData() {
+    this.profileService.getUserProfileData().then((user) => {
+      if (user) {
+        this.currentUserData = user;
       }
     });
   }
-
 }

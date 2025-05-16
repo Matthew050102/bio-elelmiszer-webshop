@@ -1,0 +1,47 @@
+@use '@angular/material' as mat;
+
+$fill-color-primary: #defdbd;
+$fill-color-secondary: #91c45a;
+
+::ng-deep :root {
+    @include mat.dialog-overrides((
+        container-color: $fill-color-primary,
+    ));
+}
+
+h1 {
+    color: $fill-color-secondary;
+    font-size: 2rem;
+    padding: 0 2rem;
+}
+
+.dialog {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0;
+    @include mat.form-field-overrides((filled-container-color: $fill-color-primary,
+            filled-focus-label-text-color: $fill-color-secondary,
+            filled-focus-active-indicator-color: $fill-color-secondary,
+            filled-caret-color: $fill-color-secondary,
+        ));
+
+    mat-form-field {
+        margin: 0.5rem 0;
+    }
+
+    .btn-submit {
+        @include mat.button-overrides((filled-label-text-color: white,
+                filled-container-color: #43ab5d,
+                filled-state-layer-color: #ffffff,
+                filled-hover-state-layer-opacity: 0.04,
+            ));
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+}

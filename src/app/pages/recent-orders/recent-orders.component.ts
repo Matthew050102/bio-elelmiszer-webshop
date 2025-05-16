@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { FormatPricePipe } from '../../pipes/format-price/format-price.pipe';
 import { DateFormatPipe } from '../../pipes/date-format/date-format.pipe';
 import { MatCardModule } from '@angular/material/card';
+import { RecentOrdersModel } from '../../models/recent-orders-model';
+import { AuthService } from '../../services/auth/auth.service';
+import { RecentOrdersService } from '../../services/recent-orders/recent-orders.service';
 
 @Component({
   selector: 'app-recent-orders',
@@ -10,30 +13,36 @@ import { MatCardModule } from '@angular/material/card';
   templateUrl: './recent-orders.component.html',
   styleUrl: './recent-orders.component.scss'
 })
+export class RecentOrdersComponent implements OnInit {
+  recentOrders: RecentOrdersModel[] = [];
+  userId: string | null = null;
+  hasOrders: boolean = false;
 
-export class RecentOrdersComponent {
-  orders = [
-    {
-      date: '2025-04-01T10:30:00',
-      totalPrice: 8999,
-      items: [
-        { name: 'BIO Zabpehely', price: 2666, quantity: 2 },
-        { name: 'BIO Mandulavaj', price: 3667, quantity: 1 }
-      ]
-    },
-    {
-      date: '2025-03-28T15:45:00',
-      totalPrice: 4999,
-      items: [
-        { name: 'Organikus Chia mag', price: 2499, quantity: 2 }
-      ]
-    },
-    {
-      date: '2025-02-20T12:00:00',
-      totalPrice: 2999,
-      items: [
-        { name: 'Gluténmentes Quinoa', price: 2999, quantity: 1 }
-      ]
-    }
-  ];
+  constructor(
+    private authService: AuthService, 
+    private recentOrderService: RecentOrdersService) {}
+
+  ngOnInit() {
+    this.loadData();
+  }
+
+  loadData() {
+    return this.authService.getUserId().then((userId) => {
+      this.userId = userId;
+      if (!this.userId) {
+        return;
+      }
+
+      this.recentOrderService.getRecentOrders(this.userId).then((recentOrders) => {
+        if (!recentOrders || recentOrders.length === 0) {
+          this.hasOrders = false;
+          return;
+        }
+
+        this.recentOrders = recentOrders;
+        this.hasOrders = this.recentOrders.length > 0;
+
+      });
+    });
+  }
 }

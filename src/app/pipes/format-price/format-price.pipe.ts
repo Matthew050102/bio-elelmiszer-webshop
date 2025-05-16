@@ -5,10 +5,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FormatPricePipe implements PipeTransform {
 
-  transform(value: number, currency: string = 'Ft'): string {
+  transform(value: number): string {
     const valueString = value.toString();
     if (valueString.length < 4) {
-      return value.toString + ' ' + currency;
+      return valueString + ' ' + 'Ft';
     }
     let formattedValue = '';
     if (valueString.length % 3 === 0) {
@@ -34,7 +34,7 @@ export class FormatPricePipe implements PipeTransform {
         formattedValue += valueString[i];
       }
     }
-    return formattedValue + ' ' + currency;
+    return formattedValue + ' ' + 'Ft';
   }
 
 }

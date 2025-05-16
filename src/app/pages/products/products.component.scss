@@ -5,71 +5,66 @@
     padding: 0;
 }
 
+:root {
+    @include mat.dialog-overrides((container-color: #defdbd,
+            subhead-color: rgba(0, 0, 0, 0.5),
+        ));
+}
+
 .products-page {
     margin: 3rem;
-    
 }
 
 .filter-ctn {
     margin-bottom: 2rem;
     padding: 1rem;
-}
-
-::ng-deep .filters {
-    @include mat.button-toggle-overrides((
-        selected-state-background-color: #d9ff96,
-    ));
-}
-
-img {
-    width: 15rem;
-    height: 15rem;
-    padding: 1rem;
-    border-radius: 2rem;
-}
-
-::ng-deep .product-card {
     display: flex;
-    height: 30rem;
-    flex-direction: column;
     justify-content: space-between;
-    align-items: center;    
-    text-align: center;
-    width: 90%;
-    @include mat.card-overrides((
-        elevated-container-color: #fafaa1,
-    ));
-}
-
-::ng-deep .product-card :hover {
-    @include mat.card-overrides((
-        elevated-container-color: rgba(229, 255, 79, 0.1),
-    ));
-}
-
-::ng-deep mat-card-actions {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    gap: 3rem;
-}
-
-.cart-btn {
-    @include mat.button-overrides((
-        filled-label-text-color: white,
-        filled-container-color: #43ab5d,
-        filled-state-layer-color: #ffffff,
-        filled-hover-state-layer-opacity: 0.04,
-    ));
-}
-
-.fav-icon {
-    color: red;
-}
-
-button {
-    display: flex;
-    justify-content: center;
     align-items: center;
 }
 
+.filters {
+    @include mat.button-toggle-overrides((selected-state-background-color: #d9ff96,
+        ));
+    display: flex;
+    flex-wrap: wrap;
+}
+
+::ng-deep .order-by-menu {
+    @include mat.menu-overrides((item-label-text-size: 0.7rem,
+            item-hover-state-layer-color: #c7f774,
+            item-focus-state-layer-color: #d8ff96a4,
+            container-color: #d9ff96,
+        ));
+}
+
+.add-product-btn {
+    padding: 1rem;
+    color: #12ce00;
+    @include mat.fab-overrides((container-color: #d9ff96,
+            ripple-color: #c5e78b,
+        ));
+
+    mat-icon {
+        margin-right: 0.1rem;
+    }
+}
+
+::ng-deep .price-slider {
+    @include mat.slider-overrides((focus-handle-color: #92f4c5,
+            hover-state-layer-color: #96ffcc2b,
+            handle-color: #96ffcc,
+            hover-handle-color: #24bdcb,
+            active-track-color: #78cba3,
+            inactive-track-color: #8df0c0,
+            focus-state-layer-color: #96ffcc32,
+            handle-width: 1rem,
+            handle-height: 1rem,
+            label-container-color: #63a887));
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    gap: 2rem;
+}

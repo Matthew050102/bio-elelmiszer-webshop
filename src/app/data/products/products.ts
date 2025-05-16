@@ -4,7 +4,7 @@ export const ProductsObjects = [
         name: 'BIO Zabpehely',
         category: 'Gabonafélék',
         price: 2666,
-        description: 'Fresh and crunchy organic apples, perfect for a healthy snack.',
+        description: 'Természetes zabpehely, amely gazdag rostokban és vitaminokban.',
         imageUrl: '../assets/images/products/zabpehely.png'
     },
     {

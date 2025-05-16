@@ -6,6 +6,7 @@
         <a routerLink="/"><img src="./assets/images/logo.png" alt="logo" /></a>
         <ul>
             <li><a routerLink="/home">Főoldal</a></li>
+            <li><a routerLink="/recommendations">Ajánlataink</a></li>
             <li><a routerLink="/about">Rólunk</a></li>
             <li><a routerLink="/products">Termékeink</a></li>
         </ul>
@@ -18,24 +19,20 @@
             </button>
         </div>
         <mat-menu #profileMenu="matMenu" xPosition="before" class="profile-menu">
-            <!-- NINCS BEJELENTKEZVE-->
-            <button mat-menu-item *ngIf="!isLoggedIn()" routerLink="/login">
-                Bejelentkezés
-            </button>
-            <button mat-menu-item *ngIf="!isLoggedIn()" routerLink="/register">
-                Regisztráció
-            </button>
+            <ng-container [ngSwitch]="isLoggedIn$ ? 'loggedIn' : 'loggedOut'">
 
-            <!--BEJELENTKEZVE-->
-            <button mat-menu-item *ngIf="isLoggedIn()" routerLink="/profile">
-                Profil
-            </button>
-            <button mat-menu-item *ngIf="isLoggedIn()" routerLink="/recent-orders">
-                Rendelések
-            </button>
-            <button mat-menu-item *ngIf="isLoggedIn()" (click)="logout()" routerLink="/">
-                Kijelentkezés
-            </button>
+                <ng-container *ngSwitchCase="'loggedOut'">
+                    <button mat-menu-item routerLink="/login">Bejelentkezés</button>
+                    <button mat-menu-item routerLink="/register">Regisztráció</button>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'loggedIn'">
+                    <button mat-menu-item routerLink="/profile">Profil</button>
+                    <button mat-menu-item routerLink="/recent-orders">Rendelések</button>
+                    <button mat-menu-item (click)="logout()" routerLink="/">Kijelentkezés</button>
+                </ng-container>
+
+            </ng-container>
         </mat-menu>
     </div>
 </div>
